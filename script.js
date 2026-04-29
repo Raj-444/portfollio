@@ -1,5 +1,8 @@
 // Header Scroll Effect
 const header = document.getElementById('header');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const navMenu = document.getElementById('nav-menu');
+const navLinks = document.querySelectorAll('nav ul li a');
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -7,6 +10,24 @@ window.addEventListener('scroll', () => {
     } else {
         header.classList.remove('scrolled');
     }
+});
+
+// Mobile Menu Toggle
+mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    
+    // Prevent scrolling when menu is open
+    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+});
+
+// Close menu when link is clicked
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenuBtn.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
 });
 
 // Smooth Scroll for Navigation Links (if added later)
